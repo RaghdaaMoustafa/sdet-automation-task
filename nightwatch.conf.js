@@ -343,11 +343,11 @@ module.exports = {
       },
     },
   },
-  output_folder: "reports", // folder where HTML reports will be saved
+  output_folder: "results-reports",
   reporter: function (results, done) {
     const mochawesome = require("mochawesome");
     const reporter = new mochawesome({
-      reportDir: "reports",
+      reportDir: "results-reports",
       reportFilename: "nightwatch-report",
       quiet: true,
       overwrite: true,

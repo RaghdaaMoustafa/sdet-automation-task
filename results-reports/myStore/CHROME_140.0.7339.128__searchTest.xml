@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="2"
+            tests="1">
+
+  <testsuite name="myStore.searchTest" id="myStore.searchTest"
+    errors="0" failures="2" hostname="" package="myStore" skipped="0"
+    tests="1" time="63.52" timestamp="">
+  
+    <testcase name="Home Page Search Test" classname="myStore.searchTest" time="63.52" assertions="12">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+      <failure message="Failed [ok]: (Potential bug: Product #6 does not match search term &#34;dress&#34; -&gt; &#34;faded short sleeves t-shirt
+$16.51
+add to cart
+more
+out of stock
+add to compare&#34;) - expected &#34;true&#34; but got: &#34;false&#34; (0ms)">$16.51
+add to cart
+more
+out of stock
+add to compare&#34;
+    at NightwatchAPI.&lt;anonymous&gt; (D:\sdet-automation-task\ui-tests\page-objects\myStorePage.js:56:31)</failure>
+
+      <failure message="Failed [ok]: (Potential bug: Product #7 does not match search term &#34;dress&#34; -&gt; &#34;blouse
+$27.00
+add to cart
+more
+out of stock
+add to compare&#34;) - expected &#34;true&#34; but got: &#34;false&#34; (1ms)">$27.00
+add to cart
+more
+out of stock
+add to compare&#34;
+    at NightwatchAPI.&lt;anonymous&gt; (D:\sdet-automation-task\ui-tests\page-objects\myStorePage.js:56:31)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

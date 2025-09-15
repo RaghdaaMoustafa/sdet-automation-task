@@ -11,7 +11,10 @@
   "description": "",
   "devDependencies": {
     "chromedriver": "^140.0.1",
+    "jest": "^30.1.3",
     "mochawesome": "^7.1.3",
-    "nightwatch": "^3.12.2"
+    "mock-user-auth": "^1.0.15",
+    "nightwatch": "^3.12.2",
+    "supertest": "^7.1.4"
   }
 }
