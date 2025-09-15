@@ -7,10 +7,10 @@ module.exports = {
     agreeJoinBtn: "button.join-form__form-body-submit-button",
     firstNameInput: "input#first-name",
     lastNameInput: "input#last-name",
-    continueBtn: 'button#join-form-submit',
-    securityCheckSection:
-      "#challenge-dialog",
+    continueBtn: "button#join-form-submit",
+    securityCheckSection: "#challenge-dialog",
   },
+
   commands: [
     {
       openPage() {
@@ -32,23 +32,25 @@ module.exports = {
       },
 
       clickAgreeAndJoin() {
-        return this.click("@agreeJoinBtn").waitForElementVisible(
-          "@firstNameInput",
-          5000
-        );
+        return this.click("@agreeJoinBtn");
       },
 
-      enterFirstAndLastName(firstName, lastName) {
-        return this.setValue("@firstNameInput", firstName).setValue(
-          "@lastNameInput",
-          lastName
-        );
-      },
-
-      clickContinueAndVerifySecurity() {
-        return this.click("@continueBtn").waitForElementVisible(
-          "@securityCheckSection",
-          5000
+      handleNameOrSecurity(firstName, lastName) {
+        const self = this;
+        return this.api.element(
+          "css selector",
+          self.elements.firstNameInput.selector,
+          function (res) {
+            if (res.status === 0) {
+              self
+                .setValue("@firstNameInput", firstName)
+                .setValue("@lastNameInput", lastName)
+                .click("@continueBtn")
+                .waitForElementVisible("@securityCheckSection", 10000);
+            } else {
+              self.waitForElementVisible("@securityCheckSection", 10000);
+            }
+          }
         );
       },
     },
