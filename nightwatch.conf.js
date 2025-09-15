@@ -43,23 +43,19 @@ module.exports = {
     default: {
       disable_error_log: false,
       launch_url: "https://nightwatchjs.org",
-
       screenshots: {
         enabled: true,
         path: "screens",
         on_failure: true,
       },
-
       desiredCapabilities: {
         browserName: "chrome",
       },
-
       webdriver: {
         start_process: true,
         server_path: "",
       },
     },
-
     firefox: {
       desiredCapabilities: {
         browserName: "firefox",
@@ -80,24 +76,22 @@ module.exports = {
         ],
       },
     },
-
     chrome: {
       desiredCapabilities: {
-        browserName: "chrome",
-        "goog:chromeOptions": {
-          // More info on Chromedriver: https://sites.google.com/a/chromium.org/chromedriver/
-          //
-          // w3c:false tells Chromedriver to run using the legacy JSONWire protocol (not required in Chrome 78)
-          w3c: true,
+        browserName: 'chrome',
+        'goog:chromeOptions': {
           args: [
-            //'--no-sandbox',
-            //'--ignore-certificate-errors',
-            //'--allow-insecure-localhost',
-            //'--headless'
-          ],
-        },
+            '--headless',
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--window-size=1920,1080',
+            '--disable-dev-tools',
+            '--disable-software-rasterizer',
+            `--user-data-dir=/tmp/chrome-profile-${Date.now()}`
+          ]
+        }
       },
-
       webdriver: {
         start_process: true,
         server_path: "",
@@ -106,7 +100,6 @@ module.exports = {
         ],
       },
     },
-
     edge: {
       desiredCapabilities: {
         browserName: "MicrosoftEdge",
@@ -118,7 +111,6 @@ module.exports = {
           ],
         },
       },
-
       webdriver: {
         start_process: true,
         // Download msedgedriver from https://docs.microsoft.com/en-us/microsoft-edge/webdriver-chromium/
@@ -129,7 +121,6 @@ module.exports = {
         ],
       },
     },
-
     //////////////////////////////////////////////////////////////////////////////////
     // Configuration for when using cucumber-js (https://cucumber.io)                |
     //                                                                               |
@@ -138,26 +129,21 @@ module.exports = {
     //////////////////////////////////////////////////////////////////////////////////
     "cucumber-js": {
       src_folders: ["examples/cucumber-js/features/step_definitions"],
-
       test_runner: {
         // set cucumber as the runner
         type: "cucumber",
-
         // define cucumber specific options
         options: {
           //set the feature path
           feature_path:
             "node_modules/nightwatch/examples/cucumber-js/*/*.feature",
-
           // start the webdriver session automatically (enabled by default)
           // auto_start_session: true
-
           // use parallel execution in Cucumber
           // workers: 2 // set number of workers to use (can also be defined in the cli as --workers=2
         },
       },
     },
-
     //////////////////////////////////////////////////////////////////////////////////
     // Configuration for when using the browserstack.com cloud service               |
     //                                                                               |
@@ -179,7 +165,6 @@ module.exports = {
           accessKey: "${BROWSERSTACK_ACCESS_KEY}",
         },
       },
-
       disable_error_log: true,
       webdriver: {
         timeout_options: {
@@ -190,14 +175,12 @@ module.exports = {
         start_process: false,
       },
     },
-
     "browserstack.local": {
       extends: "browserstack",
       desiredCapabilities: {
         "browserstack.local": true,
       },
     },
-
     "browserstack.chrome": {
       extends: "browserstack",
       desiredCapabilities: {
@@ -207,14 +190,12 @@ module.exports = {
         },
       },
     },
-
     "browserstack.firefox": {
       extends: "browserstack",
       desiredCapabilities: {
         browserName: "firefox",
       },
     },
-
     "browserstack.ie": {
       extends: "browserstack",
       desiredCapabilities: {
@@ -222,21 +203,18 @@ module.exports = {
         browserVersion: "11.0",
       },
     },
-
     "browserstack.safari": {
       extends: "browserstack",
       desiredCapabilities: {
         browserName: "safari",
       },
     },
-
     "browserstack.local_chrome": {
       extends: "browserstack.local",
       desiredCapabilities: {
         browserName: "chrome",
       },
     },
-
     "browserstack.local_firefox": {
       extends: "browserstack.local",
       desiredCapabilities: {
@@ -319,7 +297,6 @@ module.exports = {
         default_path_prefix: "/wd/hub",
       },
     },
-
     "selenium.chrome": {
       extends: "selenium_server",
       desiredCapabilities: {
@@ -329,7 +306,6 @@ module.exports = {
         },
       },
     },
-
     "selenium.firefox": {
       extends: "selenium_server",
       desiredCapabilities: {
