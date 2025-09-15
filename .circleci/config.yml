@@ -1,56 +1,63 @@
 version: 2.1
-
-executors:
-  node-executor:
-    docker:
-      - image: cimg/node:20.10
-    working_directory: ~/repo
+orbs:
+  browser-tools: circleci/browser-tools@1.4.8
 
 jobs:
-  install-deps:
-    executor: node-executor
+  install_dependencies:
+    docker:
+      - image: cimg/node:20.10-browsers
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - node-deps-{{ checksum "package-lock.json" }}
+            - node-deps-
       - run:
           name: Install Dependencies
           command: npm install
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: node-deps-{{ checksum "package-lock.json" }}
       - persist_to_workspace:
           root: .
           paths:
-            - node_modules
             - .
 
-  ui-tests:
-    executor: node-executor
+  run_ui_tests:
+    docker:
+      - image: cimg/node:20.10-browsers
     steps:
       - attach_workspace:
           at: .
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
-          name: Install Google Chrome & Chromedriver
+          name: Check Browser Installation
           command: |
-            sudo apt-get update
-            sudo apt-get install -y google-chrome-stable
-            npx chromedriver --version
+            google-chrome --version
+            chromedriver --version
       - run:
           name: Run UI Tests (Nightwatch)
           command: npm run ci:ui
       - store_artifacts:
-          path: tests_output
+          path: UI/results_reports
           destination: ui-test-results
       - store_test_results:
-          path: tests_output
+          path: UI/results_reports
 
-  api-tests:
-    executor: node-executor
+  run_api_tests:
+    docker:
+      - image: cimg/node:20.10
     steps:
       - attach_workspace:
           at: .
       - run:
           name: Start Mock Auth Server
           command: |
-            npm run dev > server.log 2>&1 &
+            npm run dev > api_server.log 2>&1 &
             echo $! > server.pid
-            sleep 5   # wait for server to boot
+            sleep 5
       - run:
           name: Run API Tests (Jest)
           command: npm run ci:api
@@ -65,12 +72,13 @@ jobs:
           path: api-tests/reports
 
 workflows:
-  test_pipeline:
+  version: 2
+  run_all_tests:
     jobs:
-      - install-deps
-      - ui-tests:
+      - install_dependencies
+      - run_ui_tests:
           requires:
-            - install-deps
-      - api-tests:
+            - install_dependencies
+      - run_api_tests:
           requires:
-            - ui-tests
+            - install_dependencies
