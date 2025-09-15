@@ -343,11 +343,11 @@ module.exports = {
       },
     },
   },
-  output_folder: "results-reports",
+  output_folder: "./ui-tests/results-reports",
   reporter: function (results, done) {
     const mochawesome = require("mochawesome");
     const reporter = new mochawesome({
-      reportDir: "results-reports",
+      reportDir: "./ui-tests/results-reports",
       reportFilename: "nightwatch-report",
       quiet: true,
       overwrite: true,

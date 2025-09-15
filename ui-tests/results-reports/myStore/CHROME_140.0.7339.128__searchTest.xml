@@ -5,9 +5,9 @@
 
   <testsuite name="myStore.searchTest" id="myStore.searchTest"
     errors="0" failures="2" hostname="" package="myStore" skipped="0"
-    tests="1" time="63.52" timestamp="">
+    tests="1" time="24.16" timestamp="">
   
-    <testcase name="Home Page Search Test" classname="myStore.searchTest" time="63.52" assertions="12">
+    <testcase name="Home Page Search Test" classname="myStore.searchTest" time="24.16" assertions="12">
 
     
 
@@ -44,7 +44,7 @@ $27.00
 add to cart
 more
 out of stock
-add to compare&#34;) - expected &#34;true&#34; but got: &#34;false&#34; (1ms)">$27.00
+add to compare&#34;) - expected &#34;true&#34; but got: &#34;false&#34; (0ms)">$27.00
 add to cart
 more
 out of stock

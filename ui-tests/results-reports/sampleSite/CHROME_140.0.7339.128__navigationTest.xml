@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="3">
+
+  <testsuite name="sampleSite.navigationTest" id="sampleSite.navigationTest"
+    errors="0" failures="0" hostname="" package="sampleSite" skipped="0"
+    tests="3" time="16.32" timestamp="">
+  
+    <testcase name="Open the page and verify page loaded" classname="sampleSite.navigationTest" time="13.07" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Navigate to Contact and assert contact page loaded" classname="sampleSite.navigationTest" time="3.058" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Click Back from browser and assert user at home page" classname="sampleSite.navigationTest" time="0.1880" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>
