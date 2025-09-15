@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: cimg/node:20.10
+      - image: cimg/node:20.10-browsers   # includes Chrome + Firefox + drivers
     working_directory: ~/repo
 
 jobs:
@@ -26,13 +26,16 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Run UI Tests (Nightwatch)
+          name: Verify Chrome Installation
+          command: google-chrome --version
+      - run:
+          name: Run UI Tests (Nightwatch with Chrome)
           command: npm run ci:ui
       - store_artifacts:
-          path: tests_output
+          path: UI/results_reports
           destination: ui-test-results
       - store_test_results:
-          path: tests_output
+          path: UI/results_reports
 
   api-tests:
     executor: node-executor
