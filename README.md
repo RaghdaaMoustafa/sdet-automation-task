@@ -1,4 +1,7 @@
 # SDET Automation Task
+# SDET Automation Task
+
+[![CircleCI](https://circleci.com/gh/RaghdaaMoustafa/sdet-automation-task.svg?style=svg)](https://circleci.com/gh/raghdaa/sdet-automation-task)
 
 This project is a comprehensive automation framework for both API and UI testing, designed for SDET (Software Development Engineer in Test) tasks. It uses JavaScript, Jest, and Nightwatch.js to automate and validate various scenarios for web applications and APIs.
 
