@@ -1,0 +1,70 @@
+version: 2.1
+
+executors:
+  node-executor:
+    docker:
+      - image: cimg/node:20.10
+    working_directory: ~/repo
+
+jobs:
+  install-deps:
+    executor: node-executor
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+            - .
+
+  ui-tests:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run UI Tests (Nightwatch)
+          command: npm run ci:ui
+      - store_artifacts:
+          path: tests_output
+          destination: ui-test-results
+      - store_test_results:
+          path: tests_output
+
+  api-tests:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Start Mock Auth Server
+          command: |
+            npm run dev > server.log 2>&1 &
+            echo $! > server.pid
+            sleep 5   # wait for server to boot
+      - run:
+          name: Run API Tests (Jest)
+          command: npm run ci:api
+      - run:
+          name: Stop Mock Auth Server
+          command: kill $(cat server.pid)
+          when: always
+      - store_artifacts:
+          path: api-tests/reports
+          destination: api-test-results
+      - store_test_results:
+          path: api-tests/reports
+
+workflows:
+  test_pipeline:
+    jobs:
+      - install-deps
+      - ui-tests:
+          requires:
+            - install-deps
+      - api-tests:
+          requires:
+            - ui-tests

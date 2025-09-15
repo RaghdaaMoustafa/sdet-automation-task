@@ -4,7 +4,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --config ./api-tests/jest.config.js --runInBand",
-    "dev": "nodemon ./node_modules/mock-user-auth/bin/www.js"
+    "dev": "nodemon ./node_modules/mock-user-auth/bin/www.js",
+    "ui-test": "nightwatch --env chrome",
+    "api-test": "jest --config ./api-tests/jest.config.js --runInBand",
+    "ci:ui": "npm run ui-test",
+    "ci:api": "npm run api-test"
   },
   "keywords": [],
   "author": "",
