@@ -126,7 +126,7 @@ npx nightwatch --env chrome
 
 ### Test Reports
 - API test results are output in the console and can be configured for JUnit/JSON reports in `api-tests/results-reports/`.
-- Nightwatch HTML reports are saved in `ui-tests/results-reports/`.
+- Nightwatch HTML reports are saved in `ui-tests/results-reports/nightwatch-html-report/index.html`.
 
 ## Customization
 - Add new API tests in `api-tests/tests/`.
@@ -136,5 +136,4 @@ npx nightwatch --env chrome
 ## Troubleshooting
 - Ensure all dependencies are installed with `npm install`.
 - For UI tests, make sure the Chrome browser is installed and up to date.
-- If you encounter issues with Jest globals (e.g., `beforeAll`), ensure you are running tests with Jest and not Node.js directly.
 

@@ -46,9 +46,9 @@ describe('Read User API Tests', () => {
             // Simulate expired token
             const response = await request()
                 .get('/api/v1/users')
-                .set('Authorization', 'expired');  // Simulate expired token
+                .set('Authorization', 'expired');  
 
-            expect(response.statusCode).toBe(403);  // Expect Unauthorized status
+            expect(response.statusCode).toBe(403);  
             expect(response.body).toHaveProperty('message', 'Unauthorized');
         } else {
             // If token is valid, continue with the usual flow
@@ -71,7 +71,7 @@ describe('Read User API Tests', () => {
             // Simulate expired token
             const response = await request()
                 .get('/api/v1/users')
-                .set('Authorization', 'expired');  // Simulate expired token
+                .set('Authorization', 'expired');  
 
             expect(response.statusCode).toBe(403);  // Expect Unauthorized status
             expect(response.body).toHaveProperty('message', 'Unauthorized');
@@ -92,7 +92,7 @@ describe('Read User API Tests', () => {
         const invalidToken = getInvalidToken();  // Use the helper to get an invalid token
         const response = await request()
             .get('/api/v1/users')
-            .set('Authorization', invalidToken);  // Pass an invalid token
+            .set('Authorization', invalidToken); 
 
         expect(response.statusCode).toBe(403);
         expect(response.body).toHaveProperty('message', 'Unauthorized');
