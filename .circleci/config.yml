@@ -61,10 +61,6 @@ jobs:
       - run:
           name: Run API Tests (Jest)
           command: npm run ci:api
-      - run:
-          name: Stop Mock Auth Server
-          command: kill $(cat server.pid)
-          when: always
       - store_artifacts:
           path: api-tests/reports
           destination: api-test-results
